@@ -10,6 +10,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
+import { USER_AVATAR } from "../utils/constants";
 
 
 
@@ -55,8 +56,7 @@ const Login = () => {
           //updating the data with the user name
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
-            photoURL:
-              "https://static.vecteezy.com/system/resources/thumbnails/036/151/783/small/illustration-cartoon-of-a-cute-boy-standing-and-smiling-in-colorful-and-casual-clothes-vector.jpg",
+            photoURL: USER_AVATAR ,
           })
             .then(() => {
               // Profile updated!
@@ -72,7 +72,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -94,7 +93,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
